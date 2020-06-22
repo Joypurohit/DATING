@@ -432,6 +432,7 @@ else{
     
 
 }
+            res.render('home',{data:array});
             
              
         }
