@@ -17,7 +17,12 @@ if(foundUser.gender==="Female")
 {
     if(foundUser.relPreference==="Straight")
     {
-        User.find({_id:{$ne:req.user},gender:"Male",relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(data){
+        User.find({_id:{$ne:req.user},gender:"Male",relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(err,data){
+            if(err)
+            {
+                 req.flash("error", "Something went wrong!")
+            res.redirect("back")
+            }
             data.forEach(function(match){
                 if(foundUser.relDistance==="Long Distance Relationships")
                 {
@@ -72,7 +77,12 @@ if(foundUser.gender==="Female")
     }
     else if(foundUser.relPreference==="Homosexual")
     {
-        User.find({_id:{$ne:req.user},gender:"Female",relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(data){
+        User.find({_id:{$ne:req.user},gender:"Female",relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(err,data){
+            if(err)
+            {
+                 req.flash("error", "Something went wrong!")
+            res.redirect("back")
+            }
             data.forEach(function(match){
                 if(foundUser.relDistance==="Long Distance Relationships")
                 {
@@ -127,7 +137,12 @@ if(foundUser.gender==="Female")
 
     }
     else{
-        User.find({_id:{$ne:req.user},relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(data){
+        User.find({_id:{$ne:req.user},relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(err,data){
+            if(err)
+            {
+                 req.flash("error", "Something went wrong!")
+            res.redirect("back")
+            }
             data.forEach(function(match){
                 if(foundUser.relDistance==="Long Distance Relationships")
                 {
@@ -189,7 +204,12 @@ else if(foundUser.gender==='Male')
 {
     if(foundUser.relPreference==="Straight")
     {
-        User.find({_id:{$ne:req.user},gender:"Female",relType:foundUser.relType},age:{$range:[initialAge,finalAge]},function(data){
+        User.find({_id:{$ne:req.user},gender:"Female",relType:foundUser.relType},age:{$range:[initialAge,finalAge]},function(err,data){
+            if(err)
+            {
+                 req.flash("error", "Something went wrong!")
+            res.redirect("back")
+            }
             data.forEach(function(match){
                 if(foundUser.relDistance==="Long Distance Relationships")
                 {
@@ -245,7 +265,12 @@ else if(foundUser.gender==='Male')
     }
     else if(foundUser.relPreference==="Homosexual")
     {
-        User.find({_id:{$ne:req.user},gender:"Male",relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(data){
+        User.find({_id:{$ne:req.user},gender:"Male",relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(err,data){
+            if(err)
+            {
+                 req.flash("error", "Something went wrong!")
+            res.redirect("back")
+            }
             data.forEach(function(match){
                 if(foundUser.relDistance==="Long Distance Relationships")
                 {
@@ -300,7 +325,12 @@ else if(foundUser.gender==='Male')
 
     }
     else{
-        User.find({_id:{$ne:req.user},relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(data){
+        User.find({_id:{$ne:req.user},relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(err,data){
+            if(err)
+            {
+                 req.flash("error", "Something went wrong!")
+            res.redirect("back")
+            }
             data.forEach(function(match){
                 if(foundUser.relDistance==="Long Distance Relationships")
                 {
@@ -363,7 +393,12 @@ else if(foundUser.gender==='Male')
 
 else{
 
-    User.find({_id:{$ne:req.user},relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(data){
+    User.find({_id:{$ne:req.user},relType:foundUser.relType,age:{$range:[initialAge,finalAge]}},function(err,data){
+        if(err)
+        {
+             req.flash("error", "Something went wrong!")
+            res.redirect("back")
+        }
         data.forEach(function(match){
             if(foundUser.relDistance==="Long Distance Relationships")
                 {
