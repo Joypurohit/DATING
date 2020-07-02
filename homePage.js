@@ -4,20 +4,26 @@ var router = express.Router();
 var User = require("../models/user");
 var count=0;
  var array=[];
+var popup=[];
 
 
 //HOME PAGE ROUTE
 
 router.get("/home/:id", function (req, res) {
-    User.findById(req.params.id, function (err, foundUser) {
+    User.findById(req.params.id).populate('notification').exec( function (err, foundUser) {
         if (err) {
             console.log(err);
             req.flash("error", "Something went wrong!")
             return res.redirect("back")
         } else {
-			
-            
-            
+		if(currentUser.notification)
+		{
+	 
+		popup=foundUser.notification;
+	        foundUser.notification=null;
+		foundUser.save();
+		
+		}
             //Female gender
             if (foundUser.gender === "Female") {
                 console.log("female");
@@ -36,7 +42,8 @@ router.get("/home/:id", function (req, res) {
                            return res.redirect("back")
                         }
                         array=matching(data,foundUser,count,array);
-                        res.render('home',{data:array});
+			   
+                        res.render('home',{data:array,popup:popup});
 
                     });
                 } else if (foundUser.relPreference === "Homosexual") {
@@ -52,7 +59,7 @@ router.get("/home/:id", function (req, res) {
                             return res.redirect("back")
                         }
                         array=matching(data,foundUser,count,array);
-                        res.render('home',{data:array});
+                        res.render('home',{data:array,popup:popup});
 
                     });
 
@@ -68,7 +75,7 @@ router.get("/home/:id", function (req, res) {
                             return res.redirect("back")
                         }
                         array=matching(data,foundUser,count,array);
-                        res.render('home',{data:array});
+                        res.render('home',{data:array,popup:popup});
 
                     });
 
@@ -90,7 +97,7 @@ router.get("/home/:id", function (req, res) {
                                 return res.redirect("back")
                             }
                             array=matching(data,foundUser,count,array);
-                            res.render('home',{data:array});
+                            res.render('home',{data:array,popup:popup});
 
                         
                     });
@@ -107,7 +114,7 @@ router.get("/home/:id", function (req, res) {
                             return res.redirect("back")
                         }
                         array=matching(data,foundUser,count,array);
-                        res.render('home',{data:array});
+                        res.render('home',{data:array,popup:popup});
 
                     });
 
@@ -124,7 +131,7 @@ router.get("/home/:id", function (req, res) {
                            return res.redirect("back")
                         }
                         array=matching(data,foundUser,count,array);
-                        res.render('home',{data:array});
+                        res.render('home',{data:array,popup:popup});
                         
                     });
 
@@ -148,7 +155,7 @@ router.get("/home/:id", function (req, res) {
                         return res.redirect("back")
                     }
                     array=matching(data,foundUser,count,array);
-                    res.render('home',{data:array});
+                    res.render('home',{data:array,popup:popup});
 
                 });
             }
